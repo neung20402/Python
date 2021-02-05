@@ -12,10 +12,16 @@ class market :
         global choise
         choise = input('กรุณาเลือกคำสั่ง :\t')
     def add_list(self) :
-        add_name = input('เพิ่มชื่อสินค้า : ')
-        add_price = input('เพิ่มราคาสินค้า : ')
-        name_list.append(add_name)
-        price_list.append(add_price)
+        print('เพิ่มรายการสินค้า หากต้องการออก กรอก exit')
+        add_name = input('เพิ่มชื่อสินค้า : ') 
+        while True :
+            if add_name == 'exit' :
+                break
+            else :
+                add_price = input('เพิ่มราคาสินค้า : ')
+                name_list.append(add_name)
+                price_list.append(add_price)
+                break
 
 while True :
     x = market()
