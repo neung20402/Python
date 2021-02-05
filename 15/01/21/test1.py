@@ -1,0 +1,5 @@
+n1=int(input('Input First Number \n'))
+n2=int(input('Input Second Number \n'))
+print('%d'%n1,' = %d'%n2,' : ',n1 == n2)
+print('%d'%n1,' > %d'%n2,' : ',n1 > n2)
+print('%d'%n1,' < %d'%n2,' : ',n1 < n2)
