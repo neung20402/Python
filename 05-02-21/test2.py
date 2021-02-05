@@ -1,0 +1,41 @@
+import os
+name_list = ['มาม่า','ลาบ','ส้มตำ','ข้าวแกง']
+price_list = [12 , 60 , 40 , 25]
+class market :
+    def list_def(self) :
+        for x in range(0,len(name_list)) :
+            print(x+1,name_list[x],price_list[x],'บาท')
+    def choose(self) :
+        print('*'*15,'หนึ่งโภชนา','*'*15)
+        print('\tแสดงรายการวินค้า [a]\n\tเพิ่มรายการสินค้า [s]\n\tออกจากระบบ [x]')
+    def input_choise(self) :
+        global choise
+        choise = input('กรุณาเลือกคำสั่ง :\t')
+    def add_list(self) :
+        add_name = input('เพิ่มชื่อสินค้า : ')
+        add_price = input('เพิ่มราคาสินค้า : ')
+        name_list.append(add_name)
+        price_list.append(add_price)
+
+while True :
+    x = market()
+    x.choose()
+    x.input_choise()
+    if choise == 'a' :
+        os.system('cls')
+        print('กรุณาเลือกคำสั่ง :\t',choise)
+        x.list_def()
+    if choise == 's' :
+        os.system('cls')
+        print('กรุณาเลือกคำสั่ง :\t',choise)
+        x.add_list()
+    if choise == 'x' :
+        os.system('cls')
+        print('กรุณาเลือกคำสั่ง :\t',choise)
+        close = input('ต้องการปิดโปรแกรมใช่หรือไม่ [y/n] : ')
+        if close == 'n' :
+            os.system('cls')
+        if close == 'y' :
+            os.system('cls')
+            print('ปิดโปรแกรมเรียบร้อย')
+            break
