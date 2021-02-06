@@ -6,24 +6,25 @@ class nisit :
         self.provin = provin
     def split_input(self) :
         global hello
-        if text[1] == 'หญิง' :
+        if newtext[1] == 'หญิง' :
             hello = 'สวัสดีค่ะ ดิฉันชื่อ '
-        elif text[1] == 'ชาย' :
+        elif newtext[1] == 'ชาย' :
             hello = 'สวัสดีครับ ผมชื่อ '
     def show_input(self) :
         print(hello,self.name,'นักศึกษาชั้นปีที่ ',self.year,'สาขา',self.saka,'มาจากจังหวัด',self.provin)
+    def input_data(self) :
+        print('-'*30,'แนะนำตัว','-'*60)
+        return input('ชื่อ สกุล:เพศ:ชั้นปี:สาขาวิชา:จังหวัดภูมิลำเนา:\t')
+    def split_data(self) :
+        global name , year , saka , provin , newtext 
+        text = nisit.input_data(None)
+        newtext = text.split(':')
+        name = newtext[0]
+        year = newtext[2]
+        saka = newtext[3]
+        provin = newtext[4]
 
-def input_data() :
-    global name , year , saka , provin , text
-    print('-'*30,'แนะนำตัว','-'*60)
-    data = input('ชื่อ สกุล:เพศ:ชั้นปี:สาขาวิชา:จังหวัดภูมิลำเนา:\t')
-    text = data.split(':')
-    name = text[0]
-    year = text[2]
-    saka = text[3]
-    provin = text[4]
-
-input_data()
+nisit.split_data(None)
 x = nisit(name,year,saka,provin)
 x.split_input()
 x.show_input()
