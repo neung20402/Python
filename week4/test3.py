@@ -54,10 +54,6 @@ def show_def() :
                 print
             if py_dict[q+num] == py_dict[-1] :
                 break
-
-
-    
-
 while True :
     menu()
     if choose == 1 :
