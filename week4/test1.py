@@ -1,5 +1,4 @@
 import os
-choice.lower = 0
 filename = ''
 
 def menu():

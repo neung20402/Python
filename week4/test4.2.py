@@ -2,7 +2,7 @@ import os
 voca_list = []
 type_list = []
 mean_list = []
-add_dict = {}
+add_dict = {'คำศัพท์':''}
 del_voca_dict = {}
 num = 0
 type_dict = {'n.':'คำนาม\t','v.':'คำกริยา\t','adj.':'คำคุณศัพท์\t','adv.':'คำกริยาวิเศษณ์'}
