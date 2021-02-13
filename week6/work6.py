@@ -31,11 +31,8 @@ def input_data_2() :
 def insert_table(Name,Sex,Age,Gyear,Email) :
     conn = sqlite3.connect (r'C:\Users\acer\Documents\Sakphichet_Python\week6\work6.db')
     c = conn.cursor()
-    c.execute ('''SELECT ID FROM data''')
-    countID = c.fetchall()
-    setID = len(countID)+1
-    supinput = '''INSERT INTO data VALUES (?,?,?,?,?,?)'''
-    insert_data = (setID,Name,Sex,Age,Gyear,Email)
+    supinput = '''INSERT INTO data VALUES (NULL,?,?,?,?,?)'''
+    insert_data = (Name,Sex,Age,Gyear,Email)
     c.execute(supinput,insert_data)
     conn.commit()
     conn.close()
@@ -100,7 +97,6 @@ def del_data() :
             os.system('cls')
 def show_choose(Uschoose) :
     print('กรุณาเลือกทำรายการ :\t',Uschoose)
-
 while True :
     show_desktop()
     choose_def()
