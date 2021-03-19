@@ -30,6 +30,9 @@ Tab.pack(fill=BOTH,expand=TRUE)
 ShBook = Frame(Tab)
 ShBook.pack(fill=BOTH,expand=TRUE)
 ShSeBook = Frame(Tab)
+ShSeBook.pack(fill=BOTH,expand=TRUE)
+ShOlBook = Frame(Tab)
+ShOlBook.pack(fill=BOTH,expand=TRUE)
 
 canvas1 = Canvas(ShBook, bg='lightsteelblue', width=root.winfo_width(), height=root.winfo_height())
 canvas1.pack()
@@ -37,8 +40,12 @@ canvas1.pack()
 canvas2 = Canvas(ShSeBook, bg='lightsteelblue', width=root.winfo_width(), height=root.winfo_height())
 canvas2.pack()
 
+canvas3 = Canvas(ShOlBook, bg='lightsteelblue', width=root.winfo_width(), height=root.winfo_height())
+canvas3.pack()
+
 Tab.add(ShBook,text='Book')
 Tab.add(ShSeBook,text='Show Select')
+Tab.add(ShOlBook,text='My Book')
 
 ###################################################################################
 
@@ -69,6 +76,7 @@ images = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14',
 AddBook_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'']
 img_list = []
 New_balance = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+OldBook_list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'']''
 
 def picture() :
     x,y=100,50
@@ -266,20 +274,55 @@ def Select_book() :
         bookTit_list.append(price)
         Show_Select.insert('','end',value=bookTit_list) 
     Show_Select.insert('','end',value=('','','','รวม '+str(allPrice)+' บาท'))    
-    
+
 def pay() :
+    Old_Re = '''SELECT Book1,Book2,Book3,Book4,Book5,Book6,Book7,Book8,Book9,Book10,Book11,Book12,
+    Book13,Book14,Book15,Book16,Book17,Book18,Book19,Book20 FROM UserRent WHERE UserID = ?'''
+    c.execute(Old_Re,(UserName,))
+    MyBook = c.fetchall()
+    NewMyBook = MyBook[0]
+    for i in range(21) :
+        OldBook_list[i] = AddBook_list[i]
+        if i < 20 :
+            OldBook_list[i] += NewMyBook[i]
     UpToDate =  '''UPDATE UserRent SET Book1=?,Book2=?,Book3=?,Book4=?,Book5=?,Book6=?,Book7=?,Book8=?,Book9=?,Book10=?,
         Book11=?,Book12=?,Book13=?,Book14=?,Book15=?,Book16=?,Book17=?,Book18=?,Book19=?,Book20=? WHERE UserID = ?'''
-    c.execute(UpToDate,tuple(AddBook_list))
+    c.execute(UpToDate,tuple(OldBook_list))
     conn.commit()
     re_balance()
     balance()
+    Ole_Rent()
 
 Button(ShSeBook,text='ยืนยันการเช่า',font=('Angsana New',15),command=pay,bg='royalblue',fg='white').place(x=1300,y=600)
+
+header = ['ID','Book Title','Volume']
+headerSize = [100,850,450]
+
+Show_Old = ttk.Treeview(ShOlBook,columns=header,show='headings',height=25)
+Show_Old.place(x=55,y=20)
+
+for h,s in zip(header,headerSize):
+	Show_Old.heading(h,text=h)
+	Show_Old.column(h,width=s)
+
+def Ole_Rent() :
+    c.execute("SELECT ID,NameBook FROM Bookdata")
+    OldBook = c.fetchall()
+    Show_Old.delete(*Show_Old.get_children())
+    Old_Re = '''SELECT Book1,Book2,Book3,Book4,Book5,Book6,Book7,Book8,Book9,Book10,Book11,Book12,
+    Book13,Book14,Book15,Book16,Book17,Book18,Book19,Book20 FROM UserRent WHERE UserID = ?'''
+    c.execute(Old_Re,(UserName,))
+    MyBook = c.fetchall()
+    NewMyBook = MyBook[0]
+    for i,OldRe in enumerate(OldBook) :
+        New_Old = list(OldRe)
+        New_Old.append(NewMyBook[i])
+        Show_Old.insert('','end',value=tuple(New_Old))
 
 picture()
 namebook()
 balance()
 AddBook()
 Select_book()
+Ole_Rent()
 root.mainloop()
