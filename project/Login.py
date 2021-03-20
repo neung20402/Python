@@ -11,7 +11,7 @@ p = conn.cursor()
 window = Tk()
 window.minsize(width=650, height=300)
 window.maxsize(width=650, height=300)
-window.title('ร้านเช่าหนังสือ')
+window.title('ร้านขายหนังสือ')
 window.geometry('650x300+500+200')
 
 ############################login#################################
@@ -50,6 +50,10 @@ def Close_pro() :
     messagebox.showinfo('Alert','Close program completed')
     window.destroy()
 
+def regis() :
+    window.destroy()
+    import Regis
+
 Frame(window,width=650,height=300,bg='gray').place(x=0,y=0)
 
 Label(window,text='เข้าสู่ระบบบัญชีผู้ใช้งาน',font=('Angsana New',25),bg='gray').place(x=230,y=10)
@@ -64,6 +68,7 @@ pass_box = ttk.Entry(window,font=('Angsana New',15),width=30,show='*')
 pass_box.place(x=230,y=130)
 
 Button(window,text='เข้าสู่ระบบ',font=('Angsana New',15),command=login).place(x=300,y=190)
+Button(window,text='สมัครบัญชีผู้ใช้',font=('Angsana New',15),command=regis).place(x=290,y=240)
 Button(window,text='ปิดโปรแกรม',font=('Angsana New',12),command=Close_pro,width=10).place(x=550,y=5)
 
 user_box.bind('<Return>',login)
